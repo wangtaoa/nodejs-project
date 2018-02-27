@@ -1,11 +1,40 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>后台登录页面</title>
+    <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <link rel="stylesheet" href="/stylesheets/login.css">
   </head>
   <body>
-	
+    <div class="logo-wrap">
+    	<img src="../images/logo.png" alt="">
+    </div>
+    <form action="" class="cont-wrap">
+    	<div class="logo2">
+    		<img src="../images/ecshop-logo.png" alt="">
+    	</div>
+    	<div class="login-cont">
+    		<div class="form-cont">
+    			<p class="p1">
+    				<input type="text" class="uname" placeholder="用户名">
+    			</p>
+    			<p class="p2">
+    				<input type="text" class="pwd" placeholder="密码">
+    			</p>
+    			<p class="p3">
+    				<input type="text" class="yz" placeholder="验证码">
+    			</p>
+    			<p class="p4">
+    				<input type="button" class="denglu" value="登录">
+    			</p>
+    			<p class="p5">
+    				<input type="checkbox" class="save" id="save">
+    				<label for="save">保存登录信息</label>
+    				<a href="java:script" class="rember">忘记密码？</a>
+    				<a href="http://www.doudoufei.top/">去店铺首页>></a>
+    			</p>
+    		</div>
+    	</div>
+    </form>
   </body>
 </html>
