@@ -11,7 +11,8 @@ img{display:block;border:0;}
 .clearfix:after{content:".";clear:both;display:block;height:0;overflow: hidden;visibility: hidden;}
 .clearfix{zoom:1;}
 
-html{height:100%;}
+html,body{height:100%;}
+body{display:flex;flex-direction:column;}
 /*top*/
 .top{height:116px;width:100%;}
 .logo-wrap{height:75px;width:100%;background:#303030;}
@@ -38,3 +39,11 @@ h1{width:262px;height:45px;float:left;margin-left:30px;margin-top:20px;}
 					margin-top:12px;margin-left:10px;}
 .nav-border{display:inline-block;float:right;width:0;height:13px;margin-top:15px;
 			border-left:1px solid #303030;border-right:1px solid #656565;}
+/*main-menu*/
+.main{display:flex;flex:1;}
+.main-menu{width:176px;overflow-x:hidden;overflow-y:auto;}
+.main-menu h2{width:152px;height:34px;background:#303030;border-top:2px solid #212121;
+			 font-size:14px;line-height:34px;color:#fff;padding-left:24px;cursor:pointer;}
+.side-menu li{width:140px;height:42px;border-top:1px solid #7f7f7f;cursor:pointer;
+			 font-size:12px;line-height:42px;color:#fff;padding-left:36px;
+			 background:#575757 url(../images/menu_1.png) no-repeat 7px center;}
