@@ -14,7 +14,7 @@ var app = express();
 app.use(session({
   resave: true, // don't save session if unmodified  
   saveUninitialized: false, // don't create session until something stored  
-  secret: 'h5_1723' 
+  secret: 'h5_1725' 
 }))
 
 // view engine setup
