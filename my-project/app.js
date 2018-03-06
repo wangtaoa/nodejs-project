@@ -9,7 +9,7 @@ var session = require('express-session');
 
 var index = require('./routes/login');
 var list = require('./routes/list');
-mongoose.connect('mongoodb://localhost/h1723');
+mongoose.connect('mongoodb://localhost/h1725');
 var app = express();
 app.use(session({
   resave: true, // don't save session if unmodified  

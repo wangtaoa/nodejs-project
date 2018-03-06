@@ -25,7 +25,7 @@ router.post('/api/remove', function(req, res, next) {
 	var id = ~~req.body.id;
 	console.log(id);
 	MongoClient.connect(DBurl, function(err1, client) {
-		var db = client.db("h1723");
+		var db = client.db("h1725");
 		var collection = db.collection("goods");
 		collection.update({"goodsnum":id},{$set:{"flag":0}},function(err){
 			if(err){
@@ -60,7 +60,7 @@ router.post("/api/changegood", function(req, res, next) {
 		}
 		var data = {"name" : name,"price" : price, "imgPath" : imgPath,"Artno" : Artno};
 		MongoClient.connect(DBurl, function(err, client) {
-			var db = client.db("h1723");
+			var db = client.db("h1725");
 			var collection = db.collection("goods");
 			collection.update({"goodsnum":goodsnum},{$set:data},function(err){
 				if(err){
@@ -78,7 +78,7 @@ function getGoods(res,condition,num,skip){
 	var num = num || 1;
 	var result = { code : 1, message : "获取列表成功",data : [],num : 0};
 	MongoClient.connect(DBurl, function(err1, client) {
-		var db = client.db("h1723");
+		var db = client.db("h1725");
 		var collection = db.collection("goods");
 		collection.find(condition).limit(num).skip((skip - 1) * num).toArray(function(err2,cursor){
 			if(err2){

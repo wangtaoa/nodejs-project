@@ -31,7 +31,7 @@ router.get('/api/login', function(req, res) {
 	var username = req.query.username;
 	var pwd = req.query.pwd;
 	MongoClient.connect(DBurl, function(err, client) {
-		var db = client.db("h1723");
+		var db = client.db("h1725");
 		var collection = db.collection("user");
 		collection.find('{"html" : "doudoufei"}').toArray(function(error, cursor){
    		if(cursor[0].username == username && cursor[0].pwd == pwd){
@@ -63,7 +63,7 @@ router.post("/api/addgood", function(req, res, next) {
 		}
 		var data = [{"name" : name,"price" : price, "imgPath" : imgPath,"goodsnum" : theGoodNum, flag : 1,"Artno" : Artno}];
 		MongoClient.connect(DBurl, function(err, client) {
-			var db = client.db("h1723");
+			var db = client.db("h1725");
 			var collection = db.collection("goods");
 			collection.insert(data,function(err){
 				if(err){
@@ -80,7 +80,7 @@ router.post("/api/addgood", function(req, res, next) {
 //封装获取当前未使用的最小编号的函数
 function getNum(){
 	MongoClient.connect(DBurl, function(err, client){
-		var db = client.db("h1723");
+		var db = client.db("h1725");
 		var collection = db.collection("goods");
 		collection.count(function(err,count){
 			theGoodNum = count + 1;
