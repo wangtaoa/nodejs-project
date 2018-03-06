@@ -1,0 +1,123 @@
+@charset "UTF-8";
+/* CSS Document */
+body, h1, h3, h2, h4, h5, h6, p, dl, dd, ul, ol, form, input, fieldset, th, td, iframe {
+  margin: 0;
+  padding: 0; }
+
+h1, h2, h3, h4, h5, h6, strong, b {
+  font-weight: normal; }
+
+i, em {
+  font-style: normal; }
+
+a {
+  text-decoration: none; }
+
+li {
+  list-style: none; }
+
+img {
+  border: none;
+  vertical-align: top; }
+
+input {
+  vertical-align: top; }
+
+a, input, area {
+  outline: none; }
+
+body {
+  font-size: 14px;
+  font-family: "Î¢ÈíÑÅºÚ"; }
+
+table {
+  border-collapse: collapse; }
+
+.clear:after {
+  content: ".";
+  display: block;
+  clear: both;
+  height: 0;
+  visibility: hidden; }
+
+html, body {
+  height: 100%;
+  width: 100%;
+  background: #555 url(../img/ecshop-bg.jpg) no-repeat;
+  background-position: center center; }
+
+body > img {
+  margin: 40px 0 0 50px; }
+
+form {
+  height: 507px;
+  width: 475px;
+  position: absolute;
+  left: calc(50% - 237px);
+  top: calc(50% - 253px); }
+  form .logo {
+    width: 248px;
+    height: 65px;
+    margin-left: 114px; }
+  form #inputbox {
+    width: 302px;
+    height: 276px;
+    padding: 51px 70px 25px;
+    margin: 50px 0 0 16px;
+    background: #e6e6e6;
+    position: relative; }
+    form #inputbox input {
+      height: 50px;
+      width: 250px;
+      border: 1px solid #ddd;
+      padding-left: 50px;
+      font-size: 12px; }
+    form #inputbox input:nth-of-type(1) {
+      border-radius: 3px 3px;
+      background: #fff url(../img/input1.jpg) no-repeat 15px center; }
+    form #inputbox input:nth-of-type(2) {
+      background: #fff url(../img/input2.jpg) no-repeat 15px center; }
+    form #inputbox input:nth-of-type(3) {
+      border-radius: 0 0 3px 3px;
+      background: #fff url(../img/input3.jpg) no-repeat 15px center; }
+    form #inputbox p {
+      width: 102px;
+      height: 34px;
+      position: absolute;
+      right: 79px;
+      top: 164px;
+      border: 1px solid #a1a1a1;
+      background: #777;
+      line-height: 34px;
+      text-align: center;
+      -moz-user-select: none;
+      -khtml-user-select: none;
+      user-select: none; }
+    form #inputbox button {
+      height: 53px;
+      width: 302px;
+      color: #fff;
+      background: #fc7878;
+      border: 0;
+      outline: 0;
+      border-radius: 3px;
+      margin-top: 20px;
+      font-size: 16px; }
+    form #inputbox h3 {
+      padding-top: 15px;
+      font-size: 12px; }
+      form #inputbox h3 input {
+        height: 15px;
+        width: 15px;
+        margin-right: 9px; }
+      form #inputbox h3 a {
+        float: right;
+        color: #41a5e1; }
+      form #inputbox h3 a:hover {
+        text-decoration: underline; }
+      form #inputbox h3 a:nth-of-type(2) {
+        margin-right: 45px; }
+  form .footer {
+    margin-top: -10px; }
+
+/*# sourceMappingURL=login.css.map */

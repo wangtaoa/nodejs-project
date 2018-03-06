@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="icon" href="favicon.ico" type="image/x-icon"/>
+		<link rel="stylesheet" href="css/login.css" />
+		<script src="js/jquery.js"></script>
+	</head>
+	<body>
+		<img src="img/shopex.png" alt="" />
+		<form>
+			<img src="img/ecshop-logo.png" alt="" class="logo"/>
+			<div id="inputbox">
+				<input type="text" placeholder="用户名" id="username"/>
+				<input type="password" placeholder="密码" id="pwd"/>
+				<input type="text" placeholder="验证码" id="mytest"/>
+				<button type="button" onclick="myTest()">登&nbsp;录</button>
+				<p id="testCode"></p>
+				<h3><input type="checkbox" /><span>保存登录信息</span><a href="###">去店铺首页&gt;&gt;</a><a href="###">忘记密码？</a></h3>
+			</div>
+			<img src="img/icloud-bar.png" alt="" class="footer"/>
+		</form>
+	</body>
+	<script>
+		var oTestCode = document.getElementById("testCode");
+		var oMyTest = document.getElementById("mytest");
+		testCode();
+		oTestCode.onclick = function(){
+			testCode();
+		}
+		function testCode(){
+			var newStr = Math.random().toString(36).substr(2,4).toUpperCase();
+			oTestCode.innerHTML = newStr;
+			oTestCode.style.background = "#" + Math.random().toString(16).substr(2,6);
+			oTestCode.style.color = "#" + Math.random().toString(16).substr(2,6);
+		}
+		function myTest(){
+			if(oMyTest.value.toUpperCase() == oTestCode.innerHTML){
+				$.ajax({
+					url : '/api/login',
+					type : "get",
+					data : {
+						username : $("#username").val(),
+						pwd : $("#pwd").val()
+					},
+					success : function(res){
+						if(res.code == 1){
+							location = "index";
+						}else{
+							alert(res.message);
+						}
+					}
+				})
+			}else{
+				 alert("验证码输入错误，请重新输入验证码");
+			}
+			return;
+		}
+	</script>
+</html>

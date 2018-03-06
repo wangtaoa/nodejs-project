@@ -4,11 +4,18 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var mongoose = require('mongoose');
+var session = require('express-session');
 
-var index = require('./routes/index');
-var users = require('./routes/users');
-
+var index = require('./routes/login');
+var list = require('./routes/list');
+mongoose.connect('mongoodb://localhost/h1723');
 var app = express();
+app.use(session({
+  resave: true, // don't save session if unmodified  
+  saveUninitialized: false, // don't create session until something stored  
+  secret: 'h5_1723' 
+}))
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -23,7 +30,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
-app.use('/users', users);
+app.use('/list', list);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

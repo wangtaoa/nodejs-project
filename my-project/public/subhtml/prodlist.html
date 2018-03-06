@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="../css/reset.css" />
+		<link rel="stylesheet" href="../css/prodlist.css" />
+		<script src="../js/jquery.js"></script>
+	</head>
+	<body>
+		<h1>ECSHOP 管理中心 - 商品列表 <a href="addprod.html"> + 添加新商品</a></h1>
+		<div id="pages">
+			<h2>
+				<img src="../img/icon_search.gif" alt="" />
+				<select>
+					<option>所有分类</option>
+				</select>
+				<select>
+					<option>所有品牌</option>
+				</select>
+				<select>
+					<option>全部</option>
+				</select>
+				<select>
+					<option>全部</option>
+				</select>
+				<span>关键字</span>
+				<input type="text"  id="search"/>
+				<button type="button" id="btnsearch">搜索</button>
+			</h2>
+			<div id="list">
+				<h3>
+					<span><input type="checkbox" />编号</span>
+					<span>商品名称</span>
+					<span>货号</span>
+					<span>价格</span>
+					<span>上架</span>
+					<span>精品</span>
+					<span>新品</span>
+					<span>热销</span>
+					<span>推荐排序</span>
+					<span>库存</span>
+					<span>虚拟销量</span>
+					<span>操作</span>
+				</h3>
+				
+				<p>
+					<b>总计</b>
+					<i id="thenumber">2</i>
+					<b>个记录&nbsp;分为</b>
+					<i id="thepagenumber">1</i>
+					<b>页&nbsp;当前第</b>
+					<i id="nowpage">1</i>
+					<b>页，每页</b>
+					<input type="text" value="15" id="pagnum"/>
+					<b>&nbsp;&nbsp;|&nbsp;&nbsp;</b>
+					<em id="paging-first">第一页</em>
+					<em id="paging-pre">上一页</em>
+					<em id="paging-next">下一页</em>
+					<em id="paging-last">最末页</em>
+					<select id="chosepage">
+						<option>1</option>
+					</select>
+				</p>
+			</div>
+			<select>
+				<option>请选择</option>
+			</select>
+			<button type="button" id="pagcot">确定</button>
+		</div>
+	</body>
+	<script>
+		$("#btnsearch").click(function(){
+			$.ajax({
+				url : "/list/api/getgoodslist",
+				type : "post",
+				data : {
+					"condition" : $("#search").val(),
+					"num" : ~~$("#pagnum").val()
+				},
+				success : function(res){
+					$("#list h4").remove();
+					var arr = res.data;
+					$("#thenumber").html(res.num);
+					$("#thepagenumber").html(Math.ceil(~~res.num / ~~$("#pagnum").val()));
+					show(arr);
+					createOption()
+				}
+			})
+		})
+		$("#pagnum").blur(function(){
+			if(!~~$("#pagnum").val()){
+				alert("输入有误，请输入一个正整数");
+			}else{
+				$.ajax({
+					url : "/list/api/getgoodslist",
+					type : "post",
+					data : {
+						"num" : ~~$("#pagnum").val(),
+						"condition" : $("#search").val()
+					},
+					success : function(res){
+						$("#list h4").remove();
+						$("#thepagenumber").html(Math.ceil(~~res.num / ~~$("#pagnum").val()));
+						var arr = res.data;
+						show(arr);
+						createOption()
+					}
+				})
+			}
+		})
+		init();
+		function init(){
+			$.ajax({
+				url : "/list/api/getgoodslist",
+				type : "post",
+				data : {
+					"num" : ~~$("#pagnum").val(),
+					"condition" : $("#search").val()
+				},
+				success : function(res){
+					if(res.code != 1){
+						alert(res.message);
+					}else{
+						var arr = res.data;
+						$("#thenumber").html(res.num);
+						$("#thepagenumber").html(Math.ceil(~~res.num / ~~$("#pagnum").val()));
+						show(arr);
+						createOption()
+					}
+				}
+			})
+		}
+		$("#paging-first").click(function(){
+			paging(1);
+		})
+		$("#paging-pre").click(function(){
+			var nowpage = ~~$("#nowpage").html();
+			if(nowpage > 1){
+				paging(nowpage - 1);
+			}
+		})
+		$("#paging-next").click(function(){
+			var nowpage = ~~$("#nowpage").html();
+			var sumpage = ~~$("#thepagenumber").html();
+			if(nowpage < sumpage){
+				paging(nowpage + 1);
+			}
+		})	
+		$("#paging-last").click(function(){
+			var sumpage = ~~$("#thepagenumber").html();
+			paging(sumpage);
+		})
+		function paging(skip){
+			$.ajax({
+				url : "/list/api/getgoodslist",
+				type : "post",
+				data : {
+					"skip" : skip,
+					"num" : $("#pagnum").val(),
+					"condition" : $("#search").val()
+				},
+				success : function(res){
+					$("#list h4").remove();
+					$("#nowpage").html(skip);
+					var arr = res.data;
+					show(arr);
+				}
+			})
+		}
+		function show(arr){
+			var len = arr.length;
+			for(var i = 0;i < len;i ++){
+				var $h4 = $('<h4><span class="number"></span><span class="name""></span><span class="Artnos"></span><span class="price"></span><span class="yes"></span><span class="yes"></span><span class="yes"></span><span class="yes"></span><span></span><span></span><span></span><span><img src="../img/icon_view.gif" alt="" /><a href = "changeinfor.html" target = "iframes" class="changeinfor"><img src="../img/icon_edit.gif" alt="" /></a><img src="../img/icon_copy.gif" alt="" /><img class="remove" src="../img/icon_trash.gif" alt="" /></span></h4>');
+				$h4.insertBefore($("#list p"));
+				$h4.find(".number").html(arr[i].goodsnum);
+				$h4.find(".name").html(arr[i].name);
+				$h4.find(".price").html(arr[i].price);
+				$h4.find(".Artnos").html(arr[i].Artno);
+				$h4.find(".changeinfor").attr("idnum",arr[i].goodsnum);
+			}
+			$(".yes").click(function(){
+				$(this).toggleClass("no");
+			})
+			$(".remove").click(function(){
+				var id = $(this).parents("h4").children("span").first().html();
+				$(this).parent().parent().remove();
+				$.ajax({
+					url : "/list/api/remove",
+					type : "post",
+					data : {
+						"id" : id
+					},
+					success : function(res){
+						$("#thenumber").html(res.num);
+						$("#thepagenumber").html(Math.ceil(~~res.num / ~~$("#pagnum").val()));
+					}
+				})
+			})
+			$(".changeinfor").click(function(){
+				document.cookie = 'idnum=' + $(this).attr("idnum") + ';path=/';
+			})
+		}
+		function createOption(){
+			var num = ~~$("#thepagenumber").html();
+			$("#chosepage").children().remove();
+			for(var i = 1;i <= num; i ++){
+				var $options = $("<option></option>");
+				$options.html(i);
+				$options.appendTo($("#chosepage"));
+			}
+			$("#chosepage").change(function(){
+				var skip = ~~$(this).val();
+				paging(skip);
+			})
+		}
+	</script>
+</html>
